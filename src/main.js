@@ -26,6 +26,18 @@ window.addEventListener('DOMContentLoaded', async () => {
   let searchTerm = '';
   let currentPage = 1;
   const pageSize = 4;
+  let sortMode = 'newest';
+
+  // Restore state from localStorage
+  try{
+    const saved = JSON.parse(localStorage.getItem('qa_state') || '{}');
+    if (saved) {
+      currentFilters = saved.filters || {};
+      searchTerm = saved.search || '';
+      currentPage = saved.page || 1;
+      sortMode = saved.sort || 'newest';
+    }
+  }catch{}
   if (filterRoot) {
     renderFilters(filterRoot, store);
     filterRoot.addEventListener('filters:apply', (e)=>{
@@ -44,8 +56,27 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Live search by title
   const searchInput = document.querySelector('.searchbar__input input');
   if (searchInput) {
+    if (searchTerm) searchInput.value = searchTerm;
     searchInput.addEventListener('input', (e)=>{
       searchTerm = e.target.value || '';
+      applyFilters(currentFilters, searchTerm);
+    });
+    // Esc clears search
+    searchInput.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        searchTerm = '';
+        applyFilters(currentFilters, searchTerm);
+      }
+    });
+  }
+
+  // Sort selection
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect){
+    sortSelect.value = sortMode;
+    sortSelect.addEventListener('change', ()=>{
+      sortMode = sortSelect.value;
       applyFilters(currentFilters, searchTerm);
     });
   }
@@ -119,6 +150,25 @@ window.addEventListener('DOMContentLoaded', async () => {
       if (!q) return;
       openQuestionModal(q);
     });
+
+    // Keyboard: open card on Enter/Space; Upvote on Enter/Space when pill focused
+    cardsRoot.addEventListener('keydown', (e)=>{
+      const pill = e.target.closest('[data-card-upvote]');
+      if (pill && (e.key === 'Enter' || e.key === ' ')){
+        e.preventDefault();
+        const id = pill.getAttribute('data-card-upvote');
+        updateQuestion(id, q => ({...q, upvotes: (q.upvotes||0)+1}));
+        applyFilters(currentFilters, searchTerm);
+        return;
+      }
+      const card = e.target.closest('.card');
+      if (card && (e.key === 'Enter' || e.key === ' ')){
+        e.preventDefault();
+        const id = card.getAttribute('data-id');
+        const q = (getStore().questions || []).find(x => x.id === id);
+        if (q) openQuestionModal(q);
+      }
+    });
   }
 
   function applyFilters(filters, term=''){
@@ -135,6 +185,14 @@ window.addEventListener('DOMContentLoaded', async () => {
       const t = term.toLowerCase();
       list = list.filter(q => String(q.title||'').toLowerCase().includes(t));
     }
+    // Sorting
+    if (sortMode === 'newest'){
+      list.sort((a,b)=> new Date(b.postedAt) - new Date(a.postedAt));
+    } else if (sortMode === 'oldest'){
+      list.sort((a,b)=> new Date(a.postedAt) - new Date(b.postedAt));
+    } else if (sortMode === 'top'){
+      list.sort((a,b)=> (b.upvotes||0) - (a.upvotes||0));
+    }
     // pagination
     const totalPages = Math.max(1, Math.ceil(list.length / pageSize));
     if (currentPage > totalPages) currentPage = totalPages;
@@ -142,6 +200,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     const pageItems = list.slice(start, start + pageSize);
     cardsRoot.innerHTML = pageItems.length ? pageItems.map(q => renderCard(q, usersById)).join('') : `<div style="color:#777">No results match your filters.</div>`;
     renderPagination(totalPages);
+    // Persist state
+    try{
+      localStorage.setItem('qa_state', JSON.stringify({ filters, search: term, page: currentPage, sort: sortMode }));
+    }catch{}
   }
 
   function openQuestionModal(question){

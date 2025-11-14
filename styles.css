@@ -36,6 +36,9 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,s
 .searchbar{display:flex;align-items:center;gap:16px}
 .searchbar__input{flex:1;display:flex;align-items:center;gap:10px;background:#fff;border-radius:10px;padding:12px 14px;border:1px solid #e1e1e1}
 .searchbar__input input{border:none;outline:none;background:transparent;width:100%;font-size:14px}
+.sort{display:flex;align-items:center;gap:8px}
+.sort__label{color:#666;font-size:12px;font-weight:600}
+.sort__select{border:1px solid var(--border);border-radius:8px;background:#fff;padding:8px 10px;font-size:14px}
 .fab{width:48px;height:48px;border-radius:50%;border:none;background:#f0f0f0;cursor:pointer;display:grid;place-items:center;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .fab:hover{transform:translateY(-1px)}
 .cards{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -93,8 +96,16 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,s
 /* Thread */
 .thread{list-style:none;padding-left:0;margin:0;display:grid;gap:10px}
 .thread--child{padding-left:24px;margin-top:8px}
-.thread__item{}
 .thread__row{display:flex;gap:10px}
 .thread__content{flex:1}
 .thread__text{background:#f7f7f7;border:1px solid var(--border);border-radius:10px;padding:10px}
 .thread__controls{display:flex;gap:6px;margin-top:6px}
+
+/* Focus styles for accessibility */
+:focus-visible{outline:2px solid #5b8cff; outline-offset:2px}
+.nav__link:focus-visible,.btn:focus-visible,.pill:focus-visible,.card:focus-visible,.sort__select:focus-visible,.searchbar__input input:focus-visible{outline:2px solid #5b8cff; outline-offset:2px}
+
+/* Empty state */
+.empty{display:grid;place-items:center;color:#777;border:1px dashed var(--border);border-radius:12px;padding:24px;margin-top:8px;background:#fafafa}
+.empty__icon{width:40px;height:40px;border-radius:8px;background:#eee;margin-bottom:8px}
+.empty__text{font-size:14px}
