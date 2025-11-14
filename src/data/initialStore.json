@@ -1,0 +1,57 @@
+{
+  "course": {
+    "professor": "Professor Yun",
+    "code": "CS1101"
+  },
+  "filters": {
+    "keywords": [
+      { "key": "top", "label": "Top Questions", "type": "flag" },
+      { "key": "professor", "label": "Professor Response", "type": "flag" },
+      { "key": "ta", "label": "TA Response", "type": "flag" }
+    ]
+  },
+  "users": [
+    { "id": "u1", "name": "Alex", "avatarColor": "#f4c431" },
+    { "id": "u2", "name": "Brook", "avatarColor": "#6ea0ff" },
+    { "id": "u3", "name": "Casey", "avatarColor": "#6ad58b" },
+    { "id": "u4", "name": "Devon", "avatarColor": "#d1d1d1" }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Confused about recursion cases",
+      "postedAt": "2025-11-13T12:00:00Z",
+      "responders": ["u1", "u2", "u3"],
+      "upvotes": 1,
+      "badges": [],
+      "image": true
+    },
+    {
+      "id": "q2",
+      "title": "Midterm review topics?",
+      "postedAt": "2025-11-13T12:30:00Z",
+      "responders": ["u2", "u3", "u4"],
+      "upvotes": 1,
+      "badges": [],
+      "image": true
+    },
+    {
+      "id": "q3",
+      "title": "Study group for Assignment 3?",
+      "postedAt": "2025-11-13T10:00:00Z",
+      "responders": ["u4", "u2", "u3"],
+      "upvotes": 1,
+      "badges": [],
+      "image": true
+    },
+    {
+      "id": "q4",
+      "title": "How does Big‑O notation work?",
+      "postedAt": "2025-11-13T09:50:00Z",
+      "responders": ["u1", "u3", "u2"],
+      "upvotes": 1,
+      "badges": ["Professor Response"],
+      "image": true
+    }
+  ]
+}
