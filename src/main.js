@@ -198,7 +198,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (currentPage > totalPages) currentPage = totalPages;
     const start = (currentPage - 1) * pageSize;
     const pageItems = list.slice(start, start + pageSize);
-    cardsRoot.innerHTML = pageItems.length ? pageItems.map(q => renderCard(q, usersById)).join('') : `<div style="color:#777">No results match your filters.</div>`;
+    const empty = document.getElementById('empty-state');
+    if (pageItems.length){
+      if (empty) empty.style.display = 'none';
+      cardsRoot.innerHTML = pageItems.map(q => renderCard(q, usersById)).join('');
+    } else {
+      cardsRoot.innerHTML = '';
+      if (empty) empty.style.display = '';
+    }
     renderPagination(totalPages);
     // Persist state
     try{
