@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -6,7 +6,7 @@
     <title>Class Q&A Wireframe</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
-    <script type="module" src="src/main.js"></script>
+    <script type="module" src="src/main.js" defer></script>
   </head>
   <body>
     <header class="navbar">
@@ -16,12 +16,16 @@
       </div>
       <nav class="nav__links" aria-label="Primary">
         <a href="#" class="nav__link">Home</a>
-        <a href="#" class="nav__link is-active" aria-current="page">Questions</a>
+        <a href="#" class="nav__link is-active" aria-current="page"
+          >Questions</a
+        >
         <a href="#" class="nav__link">Tags</a>
         <a href="#" class="nav__link">About</a>
       </nav>
       <div class="navbar__right">
-        <button class="btn" id="ask-btn" aria-label="Ask a question">Ask Question</button>
+        <button class="btn" id="ask-btn" aria-label="Ask a question">
+          Ask Question
+        </button>
         <div class="avatar"></div>
       </div>
     </header>
@@ -32,7 +36,7 @@
           <span class="course__prof">Professor Yun</span>
           <h1 class="course__code">CS1101</h1>
         </div>
-        
+
         <div class="filter" id="filter-root">
           <h3 class="filter__title">Filters</h3>
           <form class="filter__form" action="#" method="get">
@@ -53,7 +57,9 @@
             </div>
             <div class="filter__actions">
               <button type="submit" class="btn btn--small">Apply</button>
-              <button type="reset" class="btn btn--small btn--ghost">Reset</button>
+              <button type="reset" class="btn btn--small btn--ghost">
+                Reset
+              </button>
             </div>
             <div class="filter__note">Filter for better analysis of posts</div>
           </form>
@@ -64,11 +70,19 @@
         <div class="searchbar">
           <div class="searchbar__input">
             <span class="icon-search"></span>
-            <input type="text" placeholder="Search topics..." aria-label="Search topics" />
+            <input
+              type="text"
+              placeholder="Search topics..."
+              aria-label="Search topics"
+            />
           </div>
           <label class="sort">
             <span class="sort__label">Sort</span>
-            <select id="sort-select" class="sort__select" aria-label="Sort questions">
+            <select
+              id="sort-select"
+              class="sort__select"
+              aria-label="Sort questions"
+            >
               <option value="newest">Newest</option>
               <option value="top">Top</option>
               <option value="oldest">Oldest</option>
@@ -81,24 +95,63 @@
             <div class="card__media"></div>
             <div class="card__body">
               <h2 class="card__title">Confused about recursion cases</h2>
-              <div class="card__meta"><span>Posted 2 hours ago</span><div class="card__actions"><span class="icon-caret-up"></span><span class="icon-dots"></span></div></div>
-              <div class="card__footer"><div class="avatars"><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div></div><div class="pill">+1</div></div>
+              <div class="card__meta">
+                <span>Posted 2 hours ago</span>
+                <div class="card__actions">
+                  <span class="icon-caret-up"></span
+                  ><span class="icon-dots"></span>
+                </div>
+              </div>
+              <div class="card__footer">
+                <div class="avatars">
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                </div>
+                <div class="pill">+1</div>
+              </div>
             </div>
           </article>
           <article class="card">
             <div class="card__media"></div>
             <div class="card__body">
               <h2 class="card__title">Midterm review topics?</h2>
-              <div class="card__meta"><span>Posted 2 hours ago</span><div class="card__actions"><span class="icon-caret-up"></span><span class="icon-dots"></span></div></div>
-              <div class="card__footer"><div class="avatars"><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div></div><div class="pill">+1</div></div>
+              <div class="card__meta">
+                <span>Posted 2 hours ago</span>
+                <div class="card__actions">
+                  <span class="icon-caret-up"></span
+                  ><span class="icon-dots"></span>
+                </div>
+              </div>
+              <div class="card__footer">
+                <div class="avatars">
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                </div>
+                <div class="pill">+1</div>
+              </div>
             </div>
           </article>
           <article class="card">
             <div class="card__media"></div>
             <div class="card__body">
               <h2 class="card__title">Study group for Assignment 3?</h2>
-              <div class="card__meta"><span>Posted 2 hours ago</span><div class="card__actions"><span class="icon-caret-up"></span><span class="icon-dots"></span></div></div>
-              <div class="card__footer"><div class="avatars"><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div></div><div class="pill">+1</div></div>
+              <div class="card__meta">
+                <span>Posted 2 hours ago</span>
+                <div class="card__actions">
+                  <span class="icon-caret-up"></span
+                  ><span class="icon-dots"></span>
+                </div>
+              </div>
+              <div class="card__footer">
+                <div class="avatars">
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                </div>
+                <div class="pill">+1</div>
+              </div>
             </div>
           </article>
           <article class="card">
@@ -106,14 +159,28 @@
             <div class="card__body">
               <div class="badge">Professor Response</div>
               <h2 class="card__title">How does Big‑O notation work?</h2>
-              <div class="card__meta"><span>Posted 2 hours ago</span><div class="card__actions"><span>upvote</span><span class="icon-caret-up"></span></div></div>
-              <div class="card__footer"><div class="avatars"><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div><div class="avatar avatar--sm"></div></div><div class="pill">+1</div></div>
+              <div class="card__meta">
+                <span>Posted 2 hours ago</span>
+                <div class="card__actions">
+                  <span>upvote</span><span class="icon-caret-up"></span>
+                </div>
+              </div>
+              <div class="card__footer">
+                <div class="avatars">
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                  <div class="avatar avatar--sm"></div>
+                </div>
+                <div class="pill">+1</div>
+              </div>
             </div>
           </article>
         </div>
 
         <nav class="pagination" aria-label="Pagination">
-          <button class="pagination__nav" disabled><span class="icon-arrow-left"></span> Previous</button>
+          <button class="pagination__nav" disabled>
+            <span class="icon-arrow-left"></span> Previous
+          </button>
           <ul class="pagination__pages">
             <li class="is-current">1</li>
             <li>2</li>
@@ -122,7 +189,9 @@
             <li>67</li>
             <li>68</li>
           </ul>
-          <button class="pagination__nav">Next <span class="icon-arrow-right"></span></button>
+          <button class="pagination__nav">
+            Next <span class="icon-arrow-right"></span>
+          </button>
         </nav>
       </section>
     </main>
