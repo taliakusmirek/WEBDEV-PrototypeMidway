@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Question Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a href="#" class="back-arrow">&larr;</a>
+
+    <main class="page">
+      <header class="page-header">
+        <h1>Ask a Question</h1>
+        <p class="subtitle">Form</p>
+      </header>
+
+      <section class="card">
+        <form id="question-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Value"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="question">What is your question?</label>
+            <textarea
+              id="question"
+              name="question"
+              rows="5"
+              placeholder="Is it okay to use ChatGPT to check my code? I heard AI can help with debugging but I'm not sure if that counts as cheating."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option value="general">General</option>
+              <option value="homework">Homework</option>
+              <option value="programming">Programming</option>
+              <option value="math">Math</option>
+              <option value="add-new">+ Add new topic…</option>
+            </select>
+
+            <div class="new-topic-container" hidden>
+              <input
+                type="text"
+                id="new-topic"
+                placeholder="Enter a new topic"
+              />
+              <button type="button" id="save-topic">Save topic</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>How confident are you about this question?</label>
+            <div class="confidence-options">
+              <button type="button" class="confidence-btn" data-value="low">
+                Low
+              </button>
+              <button
+                type="button"
+                class="confidence-btn active"
+                data-value="medium"
+              >
+                Medium
+              </button>
+              <button type="button" class="confidence-btn" data-value="high">
+                High
+              </button>
+            </div>
+
+            <input
+              type="hidden"
+              id="confidence"
+              name="confidence"
+              value="medium"
+            />
+          </div>
+
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
