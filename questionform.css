@@ -1,0 +1,133 @@
+/* Note, this is referred to as "styles.css" in questionform.html" */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #ffffff;
+  color: #111111;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-size: 32px;
+  text-decoration: none;
+  color: #111;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #777777;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e5e5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #dddddd;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #111111;
+  box-shadow: 0 0 0 1px #11111110;
+}
+
+.confidence-options {
+  display: flex;
+  gap: 8px;
+}
+
+.confidence-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.confidence-btn.active {
+  background-color: #111111;
+  border-color: #111111;
+  color: #ffffff;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 0;
+  border-radius: 4px;
+  border: none;
+  background-color: #111111;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.92;
+}
