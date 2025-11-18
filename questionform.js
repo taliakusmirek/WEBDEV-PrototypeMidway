@@ -61,24 +61,25 @@ document.addEventListener("DOMContentLoaded", () => {
       topicSelect.options[topicSelect.selectedIndex].textContent || "General";
     const confidence = confidenceInput.value || "medium";
 
-    alert(
-      `Thanks, ${name}!\n\n` +
-        `Topic: ${topic}\n` +
-        `Confidence: ${confidence}\n\n` +
-        `Your question:\n${questionField.value.trim()}`
-    );
+    const questionText = questionField.value.trim();
+    const derivedTitle =
+      questionText.length > 60
+        ? questionText.slice(0, 57).trimEnd() + "..."
+        : questionText || "Question about " + topic;
 
-    form.reset();
+    try {
+      localStorage.setItem(
+        "qa_new_question",
+        JSON.stringify({
+          name,
+          topic,
+          confidence,
+          title: derivedTitle,
+          body: questionText,
+        })
+      );
+    } catch {}
 
-    confidenceButtons.forEach((b) => b.classList.remove("active"));
-    const defaultBtn = document.querySelector(
-      '.confidence-btn[data-value="medium"]'
-    );
-    defaultBtn.classList.add("active");
-    confidenceInput.value = "medium";
-
-    topicSelect.value = "general";
-    newTopicContainer.hidden = true;
-    newTopicInput.value = "";
+    window.location.href = "ai-review.html";
   });
 });

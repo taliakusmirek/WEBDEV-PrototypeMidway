@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AI Pre-Publish Review – Class Q&A</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="ai-review.js" defer></script>
   </head>
   <body>
     <header class="navbar">
@@ -29,17 +30,17 @@
         <div class="filter" style="padding: 16px">
           <h3 class="filter__title">Your Draft Question</h3>
           <p class="filter__subtitle">Title</p>
-          <p class="pill">I'm confused about the recursion step</p>
+          <p class="pill" id="draft-title">(Draft title)</p>
 
           <p class="filter__subtitle">Category</p>
-          <p class="pill">Homework – Recursion</p>
+          <p class="pill" id="draft-topic">(Topic)</p>
           <p class="filter__subtitle">Confidence Level</p>
-          <p class="pill">Low Confidence</p>
+          <p class="pill" id="draft-confidence">(Confidence)</p>
 
           <p class="filter__subtitle">Details</p>
           <div class="empty" style="background: #fafafa; border: 1px solid #e2e2e2;">
-            <p style="font-size: 14px; margin: 0; color: #444;">
-              I understand the base case, but I don’t know how to form the recursive step without infinite loops.
+            <p style="font-size: 14px; margin: 0; color: #444;" id="draft-body">
+              (Your question details will show here.)
             </p>
           </div>
         </div>
@@ -93,10 +94,10 @@
             "
           >
             <p style="font-size: 14px; margin-bottom: 6px;">
-              <strong>Title:</strong> Help with recursive step for Homework 3 Problem 3
+              <strong>Title:</strong> <span id="suggested-title"></span>
             </p>
             <p style="font-size: 14px;">
-              <strong>Body:</strong> I understand the base case for this recursion problem, but I’m struggling with how to define the recursive step without causing an infinite loop. How should I break this problem into a smaller subproblem?
+              <strong>Body:</strong> <span id="suggested-body"></span>
             </p>
           </div>
         </div>
@@ -109,11 +110,11 @@
             <li><a href="#">Recursion slides (Week 5)</a></li>
           </ul>
         </div>
-<div style="display: flex; justify-content: flex-end; margin-top: 20px; gap: 10px">
-          <button class="btn btn--ghost" onclick="window.location='index.html'">
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px; gap: 10px">
+          <button class="btn btn--ghost" id="btn-edit-question">
             Edit Question
           </button>
-          <button class="btn">Publish Anyway</button>
+          <button class="btn" id="btn-publish-question">Publish</button>
         </div>
       </section>
     </main>

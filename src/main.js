@@ -100,54 +100,38 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  // Ask Question modal
+  // Ask Question button: go to dedicated question form page
   const askBtn = document.getElementById("ask-btn");
   if (askBtn) {
     askBtn.addEventListener("click", () => {
-      openModal(`
-        <div class="modal">
-          <div class="modal__header">
-            <h3 class="modal__title">Ask a question</h3>
-            <button class="modal__close" aria-label="Close">×</button>
-          </div>
-          <form class="ask-form">
-            <label>Title<br><input type="text" name="title" required style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px"></label>
-            <label style="margin-top:8px;display:block">Details<br><textarea name="body" rows="4" required style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px"></textarea></label>
-            <div class="modal__replyactions" style="margin-top:10px">
-              <button class="btn btn--small" type="submit">Post question</button>
-            </div>
-          </form>
-        </div>`);
-      const root = document.getElementById("modal-root");
-      root.querySelector(".modal__close").addEventListener("click", closeModal);
-      root.querySelector(".ask-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const fd = new FormData(e.currentTarget);
-        const title = String(fd.get("title") || "").trim();
-        const body = String(fd.get("body") || "").trim();
-        if (!title || !body) return;
+      window.location.href = "questionform.html";
+    });
+  }
+
+  // If there is a newly submitted question from the form, add it to the store
+  try {
+    const draftRaw = localStorage.getItem("qa_new_question");
+    if (draftRaw) {
+      const draft = JSON.parse(draftRaw);
+      if (draft && draft.title && draft.body) {
+        const s = getStore();
         const id = "q" + Math.random().toString(36).slice(2, 7);
         const now = new Date().toISOString();
-        const q = {
+        s.questions.unshift({
           id,
-          title,
-          body,
+          title: draft.title,
+          body: draft.body,
           postedAt: now,
           responders: [],
           upvotes: 0,
           badges: [],
           image: true,
           replies: [],
-        };
-        // append to store
-        const s = getStore();
-        s.questions.unshift(q);
-        closeModal();
-        currentPage = 1;
-        applyFilters(currentFilters, searchTerm);
-      });
-    });
-  }
+        });
+      }
+      localStorage.removeItem("qa_new_question");
+    }
+  } catch {}
 
   // Render cards
   const cardsRoot = document.getElementById("cards-root");
