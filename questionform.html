@@ -6,9 +6,16 @@
     <link rel="stylesheet" href="questionform.css" />
   </head>
   <body>
-    <a href="#" class="back-arrow">&larr;</a>
+    <a href="index.html" class="back-arrow">&larr;</a>
 
     <main class="page">
+      <nav class="progress" aria-label="Question flow">
+        <ol class="progress__list">
+          <li class="progress__step progress__step--current">1. Draft</li>
+          <li class="progress__step">2. AI Check</li>
+          <li class="progress__step">3. Publish</li>
+        </ol>
+      </nav>
       <header class="page-header">
         <h1>Ask a Question</h1>
         <p class="subtitle">Form</p>
@@ -17,13 +24,12 @@
       <section class="card">
         <form id="question-form">
           <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">Name (optional)</label>
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Value"
-              required
+              placeholder="Enter a name or leave blank to stay anonymous"
             />
           </div>
 

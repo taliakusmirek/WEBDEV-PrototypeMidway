@@ -11,7 +11,15 @@
   <body>
     <header class="navbar">
       <div class="navbar__left">
-        <div class="avatar avatar--brand"></div>
+        <span class="navbar__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="5" width="18" height="12" rx="3" fill="#2563EB"/>
+            <path d="M7 11H17" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M7 9H13" stroke="#BFDBFE" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M7 13H12" stroke="#BFDBFE" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M9 17L11 19" stroke="#2563EB" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
         <span class="navbar__brand">Class Q&A</span>
       </div>
       <nav class="nav__links" aria-label="Primary">
@@ -26,7 +34,6 @@
         <button class="btn" id="ask-btn" aria-label="Ask a question">
           Ask Question
         </button>
-        <div class="avatar"></div>
       </div>
     </header>
 
@@ -90,91 +97,9 @@
           </label>
         </div>
 
-        <div class="cards" id="cards-root">
-          <article class="card">
-            <div class="card__media"></div>
-            <div class="card__body">
-              <h2 class="card__title">Confused about recursion cases</h2>
-              <div class="card__meta">
-                <span>Posted 2 hours ago</span>
-                <div class="card__actions">
-                  <span class="icon-caret-up"></span
-                  ><span class="icon-dots"></span>
-                </div>
-              </div>
-              <div class="card__footer">
-                <div class="avatars">
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                </div>
-                <div class="pill">+1</div>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card__media"></div>
-            <div class="card__body">
-              <h2 class="card__title">Midterm review topics?</h2>
-              <div class="card__meta">
-                <span>Posted 2 hours ago</span>
-                <div class="card__actions">
-                  <span class="icon-caret-up"></span
-                  ><span class="icon-dots"></span>
-                </div>
-              </div>
-              <div class="card__footer">
-                <div class="avatars">
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                </div>
-                <div class="pill">+1</div>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card__media"></div>
-            <div class="card__body">
-              <h2 class="card__title">Study group for Assignment 3?</h2>
-              <div class="card__meta">
-                <span>Posted 2 hours ago</span>
-                <div class="card__actions">
-                  <span class="icon-caret-up"></span
-                  ><span class="icon-dots"></span>
-                </div>
-              </div>
-              <div class="card__footer">
-                <div class="avatars">
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                </div>
-                <div class="pill">+1</div>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card__media"></div>
-            <div class="card__body">
-              <div class="badge">Professor Response</div>
-              <h2 class="card__title">How does Big‑O notation work?</h2>
-              <div class="card__meta">
-                <span>Posted 2 hours ago</span>
-                <div class="card__actions">
-                  <span>upvote</span><span class="icon-caret-up"></span>
-                </div>
-              </div>
-              <div class="card__footer">
-                <div class="avatars">
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                  <div class="avatar avatar--sm"></div>
-                </div>
-                <div class="pill">+1</div>
-              </div>
-            </div>
-          </article>
+        <div class="cards" id="cards-root"></div>
+        <div id="empty-state" class="empty" style="display: none; margin-top: 16px;">
+          <p>No questions yet. Be the first to ask something using the <strong>Ask Question</strong> button.</p>
         </div>
 
         <nav class="pagination" aria-label="Pagination">

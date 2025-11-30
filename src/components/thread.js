@@ -7,6 +7,8 @@ export function renderThread(list = [], usersById = {}) {
 
 function renderNode(node, users) {
   const color = users[node.author]?.avatarColor || "#d8d8d8";
+  const helpfulCount = node.helpful ?? 0;
+  const meTooCount = node.meToo ?? 0;
   return `
     <li class="thread__item" data-id="${node.id}">
       <div class="thread__row">
@@ -33,6 +35,16 @@ function renderNode(node, users) {
             <button class="btn btn--small btn--ghost" data-delete="${
               node.id
             }">Delete</button>
+            <button class="btn btn--small btn--ghost" data-helpful="${
+              node.id
+            }">👍 Helpful${
+              helpfulCount > 0 ? ` (${helpfulCount})` : ""
+            }</button>
+            <button class="btn btn--small btn--ghost" data-me-too="${
+              node.id
+            }">🙋 Me too${
+              meTooCount > 0 ? ` (${meTooCount})` : ""
+            }</button>
           </div>
 
           <div class="replybox" data-replybox="${

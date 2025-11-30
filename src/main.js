@@ -100,6 +100,19 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
+  // Simple Tags behavior: show only questions with a non-General topic
+  const tagsLink = Array.from(
+    document.querySelectorAll(".nav__links .nav__link")
+  ).find((el) => el.textContent.trim() === "Tags");
+
+  if (tagsLink) {
+    tagsLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      currentFilters = { ...currentFilters, topicNotGeneral: true };
+      applyFilters(currentFilters, searchTerm);
+    });
+  }
+
   // Ask Question button: go to dedicated question form page
   const askBtn = document.getElementById("ask-btn");
   if (askBtn) {
@@ -121,12 +134,14 @@ window.addEventListener("DOMContentLoaded", async () => {
           id,
           title: draft.title,
           body: draft.body,
+          topic: draft.topic || "General",
           postedAt: now,
           responders: [],
           upvotes: 0,
           badges: [],
           image: true,
           replies: [],
+          confidence: draft.confidence || "medium",
         });
       }
       localStorage.removeItem("qa_new_question");
@@ -188,6 +203,11 @@ window.addEventListener("DOMContentLoaded", async () => {
       // Demo heuristic: questions with at least 1 reply are considered 'TA Response'
       list = list.filter((q) => (q.replies || []).length > 0);
     }
+    if (filters.topicNotGeneral) {
+      list = list.filter(
+        (q) => q.topic && String(q.topic).toLowerCase() !== "general"
+      );
+    }
     if (term) {
       const t = term.toLowerCase();
       list = list.filter((q) =>
@@ -215,6 +235,13 @@ window.addEventListener("DOMContentLoaded", async () => {
       cardsRoot.innerHTML = pageItems
         .map((q) => renderCard(q, usersById))
         .join("");
+
+      // Soft-animate cards in
+      requestAnimationFrame(() => {
+        cardsRoot.querySelectorAll(".card").forEach((card, i) => {
+          setTimeout(() => card.classList.add("is-visible"), i * 30);
+        });
+      });
     } else {
       cardsRoot.innerHTML = "";
       if (empty) empty.style.display = "";
@@ -325,7 +352,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       const submitBtn = e.target.closest("[data-submit-reply]");
       const cancelBtn = e.target.closest("[data-cancel-reply]");
       const actionBtn = e.target.closest(
-        "[data-edit], [data-delete], [data-upvote], [data-conf]"
+        "[data-edit], [data-delete], [data-upvote], [data-conf], [data-helpful], [data-me-too]"
       );
 
       // Open reply
@@ -387,13 +414,19 @@ window.addEventListener("DOMContentLoaded", async () => {
           ? "up"
           : actionBtn.dataset.conf
           ? "conf"
+          : actionBtn.dataset.helpful
+          ? "helpful"
+          : actionBtn.dataset.meToo
+          ? "meToo"
           : null;
 
         const cid =
           actionBtn.dataset.edit ||
           actionBtn.dataset.delete ||
           actionBtn.dataset.upvote ||
-          actionBtn.dataset.conf;
+          actionBtn.dataset.conf ||
+          actionBtn.dataset.helpful ||
+          actionBtn.dataset.meToo;
 
         updateQuestion(question.id, (q) => {
           const copy = q;
@@ -484,6 +517,10 @@ window.addEventListener("DOMContentLoaded", async () => {
             upvotes: 0,
             replies: [],
           });
+        else if (action === "helpful")
+          c.helpful = (c.helpful || 0) + 1;
+        else if (action === "meToo")
+          c.meToo = (c.meToo || 0) + 1;
         return true;
       }
       if (c.replies && mutateComment(c.replies, targetId, action)) return true;
